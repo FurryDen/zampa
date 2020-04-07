@@ -2,7 +2,7 @@
 <img src="https://i2.wp.com/furryden.it/wp-content/uploads/2018/07/CHI-SIAMO1_sito.png?ssl=1" alt="Smiley face" height="297" width="800">
 </p>
 
-[![Python3.7+](https://img.shields.io/badge/Python-3.7%2B-green.svg)](https://www.python.org/downloads)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4988792a122f410bb6ef1bbca6c3d6ad)](https://www.codacy.com/gh/Infocom-Telegram-Community/nebula?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Infocom-Telegram-Community/nebula&amp;utm_campaign=Badge_Grade)
+[![Python3.7+](https://img.shields.io/badge/Python-3.7%2B-green.svg)](https://www.python.org/downloads) [![Group](https://img.shields.io/badge/Group-FurryDen-blue)](https://t.me/officialfurryden) [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen)](https://github.com/FurryDen/zampa/blob/master/LICENSE)
 
 ## How to start
 
