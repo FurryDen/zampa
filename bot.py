@@ -129,7 +129,7 @@ def main():
     #                          FILTERS HANDLER                              #
     #########################################################################
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, handler.welcome.init))
-    dp.add_handler(CommandHandler('r', restart, filters=Filters.user(username='@BluLupo')))
+    dp.add_handler(CommandHandler('restart', restart, filters=Filters.user(username='@BluLupo')))
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("listbutton", handler.delete_buttons.init)],
         states={
