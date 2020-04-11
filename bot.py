@@ -8,6 +8,7 @@
 import logging
 import os
 import sys
+import core.decorators
 from threading import Thread
 from datetime import datetime
 from core.utility import error_handler
@@ -121,6 +122,7 @@ def main():
     def stop_and_restart():
         updater.stop()
         os.execl(sys.executable, sys.executable, *sys.argv)
+    @core.decorators.owner.init
     def restart(update, context):
         update.message.reply_text('Bot is restarting...')
         Thread(target=stop_and_restart).start()
@@ -129,7 +131,7 @@ def main():
     #                          FILTERS HANDLER                              #
     #########################################################################
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, handler.welcome.init))
-    dp.add_handler(CommandHandler('restart', restart, filters=Filters.user(username='@BluLupo')))
+    dp.add_handler(CommandHandler("restart", restart))
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("listbutton", handler.delete_buttons.init)],
         states={
