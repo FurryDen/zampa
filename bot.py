@@ -6,6 +6,9 @@
 
 # Python import for error handler and logging
 import logging
+import os
+import sys
+from threading import Thread
 from datetime import datetime
 from core.utility import error_handler
 
@@ -115,11 +118,18 @@ def messageHandler(dispatcher):
 # This is the function that initializes the bot
 def main():
     updater = Updater(Config.BOT_API, use_context=True)
+    def stop_and_restart():
+        updater.stop()
+        os.execl(sys.executable, sys.executable, *sys.argv)
+    def restart(update, context):
+        update.message.reply_text('Bot is restarting...')
+        Thread(target=stop_and_restart).start()
     dp = updater.dispatcher
     #########################################################################
     #                          FILTERS HANDLER                              #
     #########################################################################
     dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, handler.welcome.init))
+    dp.add_handler(CommandHandler('r', restart, filters=Filters.user(username='@BluLupo')))
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler("listbutton", handler.delete_buttons.init)],
         states={

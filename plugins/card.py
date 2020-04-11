@@ -1,7 +1,7 @@
 import core.decorators
 from core.sql.db_connect import Connection
 
-keywordCard = ["miki", "bluewolf", "degron", "ryanking", "leo"]
+keywordCard = ["miki", "bluewolf", "degron", "ryanking", "leo", "tony"]
 
 @core.decorators.admin.user_admin
 @core.decorators.delete.init
