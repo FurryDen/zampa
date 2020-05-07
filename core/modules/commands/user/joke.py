@@ -1,6 +1,8 @@
+import core.decorators
 from core.sql.db_connect import Connection
 from core.sql.handler_sql import Sql_Joke
 
+@core.decorators.delete.init
 def init(update, context):
     bot = context.bot
     connector = Connection()

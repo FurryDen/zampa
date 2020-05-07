@@ -3,10 +3,11 @@ from core.sql.db_connect import Connection
 from core.sql.commands_sql import Sql_Pin
 
 @core.decorators.admin.user_admin
+@core.decorators.bot_admin.bot_admin
 @core.decorators.delete.init
 def init(update, context):
     bot = context.bot
-    message = update.message.text[10:]
+    message = update.message.text[7:]
     connector = Connection()
     chatid = str(update.message.chat_id)
     query = Sql_Pin.SQL_SET

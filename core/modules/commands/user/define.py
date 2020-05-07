@@ -12,10 +12,10 @@ def init(update, context):
         pg = wiki.page(wiki.search(arg)[0])
         title = pg.title
         pg_url = pg.url
-        definizione = pg.summary
-        button_list = [InlineKeyboardButton("Guarda su Wikipedia", url=pg_url)]
+        define = pg.summary
+        button_list = [InlineKeyboardButton("==> Wikipedia", url=pg_url)]
         reply_markup = InlineKeyboardMarkup(utils.build_menu(button_list, n_cols=1))
-        text = "*{}:*\n\n{}".format(title, definizione)
+        text = "*{}:*\n\n{}".format(title, define)
         update.message.reply_markdown(text, reply_markup=reply_markup)
     except:
         bot.send_message(update.message.chat_id, text="Mi spiace {user} non ho trovato quello che cercavi"

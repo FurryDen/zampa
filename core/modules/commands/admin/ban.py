@@ -9,7 +9,7 @@ from telegram.ext.dispatcher import run_async
 @core.decorators.delete.init
 def init(update, context):
     bot = context.bot
-    var_message = update.message.text[4:]
+    var_message = update.message.text[4:].replace('{}',update.message.from_user.username)
     if var_message != "":
         bot.send_message(update.message.chat_id, text="{id} è stato <b>bannato</b> da {chat_title}\n"\
                     "per il seguente motivo: {motivation}".format(

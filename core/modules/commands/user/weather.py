@@ -7,7 +7,7 @@ from yandex.Translater import Translater
 @core.decorators.delete.init
 def init(update, context):
 	bot = context.bot
-	var_messagge = update.message.text[6:]
+	var_messagge = update.message.text[8:]
 	# Variables
 	currenttimestr = 'Tempo attuale a '
 	citynotfoundstr = 'Non ho trovato la città'

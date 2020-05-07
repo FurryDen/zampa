@@ -6,7 +6,7 @@ from core.sql.commands_sql import Sql_Insert_J
 @core.decorators.delete.init
 def init(update, context):
     bot = context.bot
-    message = update.message.text[11:]
+    message = update.message.text[8:]
     connector = Connection()
     query = Sql_Insert_J.SQL_1
     connector.cur.execute(query, [message])

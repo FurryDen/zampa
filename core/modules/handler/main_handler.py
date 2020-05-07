@@ -1,11 +1,10 @@
 from config import Config
 from . import (
     admin_command,
-    joke,
     custom_handler,
-	send_nudes,
     bad_words,
-	super_ban_handler
+	super_ban_handler,
+	debug_terminal
     )
 
 msg = ""
@@ -17,19 +16,15 @@ def trigger(match):
 def init(update, context):
 	global msg #pylint: disable=global-statement
 
-
 	bad_words.init(update, context)
 	super_ban_handler.init(update, context)
+	debug_terminal.init(update)
 	if update.message is None or update.message.text is None:
 		return
 
 	msg = update.message.text
 
-	if trigger("{} send nudes".format(Config.BOT_NAME)):
-		send_nudes.init(update, context)
-	elif trigger("{} fai una battuta".format(Config.BOT_NAME)):
-		joke.init(update, context)
-	elif trigger("@admin"):
+	if trigger("@admin"):
 		admin_command.init(update, context)
 	elif trigger(Config.BOT_NAME):
 		custom_handler.customhandler(update, context)

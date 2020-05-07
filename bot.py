@@ -6,26 +6,30 @@
 
 # Python import for error handler and logging
 import logging
-import os
-import sys
-import core.decorators
-from threading import Thread
 from datetime import datetime
 from core.utility import error_handler
 
 # Import telegram library
 from telegram.ext import (
     Updater,
-    CommandHandler,
-    MessageHandler,
-    CallbackQueryHandler,
-    ConversationHandler,
+    CommandHandler as CMH,
+    MessageHandler as MH,
+    CallbackQueryHandler as CQH,
+    ConversationHandler as CH,
     Filters)
 
 # Import local files
 import plugins
 from config import Config
 from core.modules import commands,handler
+
+# Commands Variables
+# @param usr = user commands
+# @param adm = admin commands
+# @param own = owner commands
+usr = commands.user
+adm = commands.admin
+own = commands.owner
 
 timestamp = datetime.strftime(datetime.today(), '%H:%M at %d/%m/%Y')
 print("Start Bot {}".format(timestamp))
@@ -38,20 +42,24 @@ logger = logging.getLogger(__name__)
 #       Here I "create" the commands and assign a function              #
 #########################################################################
 
-def commandHandler(dispatcher):
-    dispatcher.add_handler(CommandHandler("start", commands.user.start.init))
-    dispatcher.add_handler(CommandHandler(commands.user.rules.activationWords, commands.user.rules.action))
-    dispatcher.add_handler(CommandHandler("aiuto", commands.user.help.init))
-    dispatcher.add_handler(CommandHandler("source", commands.user.source.init))
-    dispatcher.add_handler(CommandHandler("io", commands.user.io.init))
-    dispatcher.add_handler(CommandHandler("distro", commands.user.distro.init))
-    dispatcher.add_handler(CommandHandler("richiedi", commands.user.request_function.init))
-    dispatcher.add_handler(CommandHandler("feedback", commands.user.feedback.init))
-    dispatcher.add_handler(CommandHandler("traduci", commands.user.translate.init))
-    dispatcher.add_handler(CommandHandler("google", commands.user.search_google.init))
-    dispatcher.add_handler(CommandHandler("cerca", commands.user.search_qwant.init))
-    dispatcher.add_handler(CommandHandler("meteo", commands.user.weather.init))
-    dispatcher.add_handler(CommandHandler("wikipedia", commands.user.define.init))
+def commandHandler(dsp):
+    FUNCTION = dsp.add_handler
+
+    FUNCTION(CMH("start", usr.start.init))
+    FUNCTION(CMH(usr.rules.activationWords, usr.rules.action))
+    FUNCTION(CMH("help", usr.help.init))
+    FUNCTION(CMH("source", usr.source.init))
+    FUNCTION(CMH("io", usr.io.init))
+    FUNCTION(CMH("distro", usr.distro.init))
+    FUNCTION(CMH("richiedi", usr.request_function.init))
+    FUNCTION(CMH("feedback", usr.feedback.init))
+    FUNCTION(CMH("traduci", usr.translate.init))
+    FUNCTION(CMH("google", usr.search_google.init))
+    FUNCTION(CMH("cerca", usr.search_qwant.init))
+    FUNCTION(CMH("weather", usr.weather.init))
+    FUNCTION(CMH("wikipedia", usr.define.init))
+    FUNCTION(CMH("joke", usr.joke.init))
+    FUNCTION(CMH("staff", usr.get_staff.init))
 
 #########################################################################
 #                           ADMIN COMMAND                               #
@@ -59,28 +67,27 @@ def commandHandler(dispatcher):
 #                   Source: /core/decorators/admin.py                   #
 #                                                                       #
 #########################################################################
-    dispatcher.add_handler(CommandHandler("ban", commands.admin.ban.init))
-    dispatcher.add_handler(CommandHandler("superban", commands.admin.superban.init))
-    dispatcher.add_handler(CommandHandler("silenzia", commands.admin.silence.init))
-    dispatcher.add_handler(CommandHandler("desilenzia", commands.admin.unsilence.init))
-    dispatcher.add_handler(CommandHandler("badword", commands.admin.insert_bad_words.init))
-    dispatcher.add_handler(CommandHandler("kick", commands.admin.kick.init))
-    dispatcher.add_handler(CommandHandler("info", commands.admin.get.init))
-    dispatcher.add_handler(CommandHandler("setbattuta", commands.admin.insert_joke.init))
-    dispatcher.add_handler(CommandHandler("setrisposta", commands.admin.insert_custom_handler.init))
-    dispatcher.add_handler(CommandHandler("muta", commands.admin.mute.init))
-    dispatcher.add_handler(CommandHandler("smuta", commands.admin.unmute.init))
-    dispatcher.add_handler(CommandHandler("fissa", commands.admin.pin.init))
-    dispatcher.add_handler(CommandHandler("say", commands.admin.say.init))
-    dispatcher.add_handler(CommandHandler("a", commands.admin.announcement.init))
-    dispatcher.add_handler(CommandHandler("setwelcome", commands.admin.insert_welcome.init))
-    dispatcher.add_handler(CommandHandler("updatewelcome", commands.admin.update_welcome.init))
-    dispatcher.add_handler(CommandHandler("listwelcome", commands.admin.list_welcome.init))
-    dispatcher.add_handler(CommandHandler("setfissa", commands.admin.set_pin.init))
-    dispatcher.add_handler(CommandHandler("add", commands.admin.add_buttons.init))
-    dispatcher.add_handler(CommandHandler("delete", commands.admin.delete_command.init))
-    dispatcher.add_handler(CommandHandler("setrules", commands.admin.set_rules.init))
-    dispatcher.add_handler(CommandHandler("badlist", commands.admin.list_badwords.init))
+    FUNCTION(CMH("ban", adm.ban.init))
+    FUNCTION(CMH("superban", adm.superban.init))
+    FUNCTION(CMH("silence", adm.silence.init))
+    FUNCTION(CMH("unsilence", adm.unsilence.init))
+    FUNCTION(CMH("badword", adm.insert_bad_words.init))
+    FUNCTION(CMH("kick", adm.kick.init))
+    FUNCTION(CMH("info", adm.get.init))
+    FUNCTION(CMH("setrisposta", adm.insert_custom_handler.init))
+    FUNCTION(CMH("mute", adm.mute.init))
+    FUNCTION(CMH("unmute", adm.unmute.init))
+    FUNCTION(CMH("pin", adm.pin.init))
+    FUNCTION(CMH("say", adm.say.init))
+    FUNCTION(CMH("a", adm.announcement.init))
+    FUNCTION(CMH("setwelcome", adm.insert_welcome.init))
+    FUNCTION(CMH("updatewelcome", adm.update_welcome.init))
+    FUNCTION(CMH("listwelcome", adm.list_welcome.init))
+    FUNCTION(CMH("setpin", adm.set_pin.init))
+    FUNCTION(CMH("add", adm.add_buttons.init))
+    FUNCTION(CMH("delete", adm.delete_command.init))
+    FUNCTION(CMH("setrules", adm.set_rules.init))
+    FUNCTION(CMH("badlist", adm.list_badwords.init))
 
 #########################################################################
 #                           OWNER COMMAND                               #
@@ -88,9 +95,10 @@ def commandHandler(dispatcher):
 #                   Source: /core/decorators/owner.py                   #
 #                                                                       #
 #########################################################################
-    dispatcher.add_handler(CommandHandler("exit", commands.owner.leave.init))
-    dispatcher.add_handler(CommandHandler("server", commands.owner.server.init))
-    dispatcher.add_handler(CommandHandler("test", commands.owner.test.init))
+    FUNCTION(CMH("exit", own.leave.init))
+    FUNCTION(CMH("server", own.server.init))
+    FUNCTION(CMH("setjoke", own.insert_joke.init))
+    FUNCTION(CMH("test", own.test.init))
 
 #########################################################################
 #                           PLUGINS MODULES                             #
@@ -98,46 +106,45 @@ def commandHandler(dispatcher):
 #                           Source: /plugins                            #
 #                                                                       #
 #########################################################################
-    dispatcher.add_handler(CommandHandler(plugins.card.keywordCard, plugins.card.init))
-    dispatcher.add_handler(CommandHandler("setbio", plugins.card.card_update))
-    dispatcher.add_handler(CommandHandler("e926", plugins.e926_search.init))
+    if Config.LOAD_PLUGINS == True:
+        FUNCTION(CMH("e926", plugins.e926_search.init))
+        FUNCTION(CMH("setbio", plugins.card.card_update))
+        FUNCTION(CMH(plugins.card.keywordCard, plugins.card.init))
+
 
 #########################################################################
 #                CALLBACKQUERY HANDLER(Buttons Update)                  #
 #########################################################################
-def callbackQueryHandler(dispatcher):
-    dispatcher.add_handler(CallbackQueryHandler(handler.admin_command.resolved, pattern='resolved'))
+def callbackQueryHandler(dsp):
+    FUNCTION = dsp.add_handler
+    FUNCTION(CQH(handler.admin_command.resolved, pattern='resolved'))
+    FUNCTION(CQH(usr.start.welcome_button, pattern='welcome_button'))
+    FUNCTION(CQH(usr.start.back_button, pattern='back_button'))
 
 #########################################################################
 #                              MAIN_HANDLER                             #
 #               Source: /core/modules/handler/main_handler.py           #
 #        Here we call the functions without a command, => handler       #
 #########################################################################
-def messageHandler(dispatcher):
-    dispatcher.add_handler(MessageHandler(None, handler.main_handler.init))
+def messageHandler(dsp):
+    FUNCTION = dsp.add_handler
+    FUNCTION(MH(None, handler.main_handler.init))
 
 # This is the function that initializes the bot
 def main():
     updater = Updater(Config.BOT_API, use_context=True)
-    def stop_and_restart():
-        updater.stop()
-        os.execl(sys.executable, sys.executable, *sys.argv)
-    @core.decorators.owner.init
-    def restart(update, context):
-        update.message.reply_text('Bot is restarting...')
-        Thread(target=stop_and_restart).start()
     dp = updater.dispatcher
     #########################################################################
     #                          FILTERS HANDLER                              #
     #########################################################################
-    dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, handler.welcome.init))
-    dp.add_handler(CommandHandler("restart", restart))
-    conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("listbutton", handler.delete_buttons.init)],
+    dp.add_handler(MH(Filters.status_update.new_chat_members, handler.welcome.init))
+    dp.add_handler(MH(Filters.document.exe, handler.filters_handler.exe))
+    conv_handler = CH(
+        entry_points=[CMH("listbutton", handler.delete_buttons.init)],
         states={
-            handler.delete_buttons.RECEIVE_ID: [MessageHandler(Filters.text & (~ Filters.command), handler.delete_buttons.receive_id)]
+            handler.delete_buttons.RECEIVE_ID: [MH(Filters.text & (~ Filters.command), handler.delete_buttons.receive_id)]
         },
-        fallbacks=[CommandHandler("cancel", handler.delete_buttons.cancel)]
+        fallbacks=[CMH("cancel", handler.delete_buttons.cancel)]
     )
     dp.add_handler(conv_handler)
     commandHandler(dp)

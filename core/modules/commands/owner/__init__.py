@@ -1,6 +1,7 @@
 __all__ = ["leave",
            "server",
-           "test"
+           "test",
+           "insert_joke"
            ]
 
 from core.modules.commands.owner import *

@@ -11,7 +11,9 @@ __all__ = [
            "search_google",
            "search_qwant",
            "weather",
-           "define"
+           "define",
+           "joke",
+           "get_staff"
            ]
 
 from core.modules.commands.user import *

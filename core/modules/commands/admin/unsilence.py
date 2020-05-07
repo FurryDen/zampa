@@ -12,5 +12,5 @@ def init(update, context):
                            can_add_web_page_previews=True, can_change_info=False,
                            can_invite_users=False, can_pin_messages=False))
     bot.send_message(update.message.chat_id, text="<b>Silenzio Globale Disattivato!\n</b>"\
-                                                  "Gli utenti possono tornare regolarmente a scrivere!", 
+                                                  "Gli utenti possono tornare regolarmente a scrivere!",
                                                   parse_mode='HTML')

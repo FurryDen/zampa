@@ -8,7 +8,7 @@ def init(update, context):
 	bot = context.bot
 	message = update.message.text[9:]
 	if message != "":
-		bot.send_message(Config.STAFF_GROUP,
+		bot.send_message(Config.OWNER,
 		text="<b>FEEDBACK:</b>\n<code>Messaggio:{}</code>"
 		.format(message),
 		parse_mode='HTML')

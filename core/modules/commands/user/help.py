@@ -1,12 +1,9 @@
-from config import Config
-from core.sql.db_connect import Connection
-from core.sql.commands_sql import Sql_Help
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 def init(update, context):
-    bot = context.bot
-    connector = Connection()
-    query = Sql_Help.SQL
-    connector.cur.execute(query)
-    row = connector.cur.fetchone()
-    help_message = "{}\n\nRelease info: {source}".format(row[0],source=Config.SOURCE)
-    bot.send_message(update.message.chat_id,help_message, parse_mode='HTML')
+  bot = context.bot
+  chat = update.effective_chat
+  if chat.type != chat.PRIVATE:
+    update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
+    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(text="Help",url="t.me/{}?start=help".format(bot.username))]]))
+    return

@@ -1,7 +1,7 @@
 import os
 from config import Config
 from functools import wraps
-from telegram import User, Chat, ChatMember
+from telegram import Chat, ChatMember
 
 DEL_CMDS = bool(os.environ.get("DEL_CMDS", False))
 LIST_OF_ADMINS = Config.ADMIN_ID

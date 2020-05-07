@@ -13,8 +13,6 @@ class Sql_Update_W:
 class Sql_Pin:
     SQL = "SELECT content FROM fixed_default WHERE id_group = %s ORDER BY created_at DESC LIMIT 1"
     SQL_SET = "INSERT INTO fixed_default (content, id_group) VALUES(%s,%s)"
-class Sql_Help:
-    SQL = "SELECT help_text FROM help_table WHERE ID=1"
 class Sql_Add_Buttons:
     SQL = "INSERT INTO urls (text, url, id_group) VALUES (%s, %s, %s)"
 class Sql_Buttons:
