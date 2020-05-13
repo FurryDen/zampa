@@ -6,7 +6,7 @@ class Config(object):
     BOT_USER = " @usernamebot"
     BOT_NAME = "zampa"
     AUTHOR = " FurryDen Project"
-    VERSION = " 17.0.1(Suricato)"
+    VERSION = " 17.0.2(Suricato)"
     SOURCE = "https://github.com/FurryDen/zampa"
     LOAD_PLUGINS = True
     #########################################################################
