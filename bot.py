@@ -128,7 +128,7 @@ def callbackQueryHandler(dsp):
 #########################################################################
 def messageHandler(dsp):
     FUNCTION = dsp.add_handler
-    FUNCTION(MH(None, handler.main_handler.init))
+    FUNCTION(MH(Filters.group, handler.main_handler.init))
 
 # This is the function that initializes the bot
 def main():
