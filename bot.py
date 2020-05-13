@@ -109,7 +109,7 @@ def commandHandler(dsp):
     if Config.LOAD_PLUGINS == True:
         FUNCTION(CMH("e926", plugins.e926_search.init))
         FUNCTION(CMH("setbio", plugins.card.card_update))
-        FUNCTION(CMH(plugins.card.keywordCard, plugins.card.init))
+        FUNCTION(CMH("card", plugins.card.init))
 
 
 #########################################################################
@@ -119,6 +119,7 @@ def callbackQueryHandler(dsp):
     FUNCTION = dsp.add_handler
     FUNCTION(CQH(handler.admin_command.resolved, pattern='resolved'))
     FUNCTION(CQH(usr.start.welcome_button, pattern='welcome_button'))
+    FUNCTION(CQH(usr.start.admin_command, pattern='admin_command'))
     FUNCTION(CQH(usr.start.back_button, pattern='back_button'))
 
 #########################################################################
