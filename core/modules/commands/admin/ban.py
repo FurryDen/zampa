@@ -2,6 +2,7 @@ import core.decorators
 from config import Config
 from telegram import User
 from telegram.ext.dispatcher import run_async
+
 from cli._ext.argparse import ArgumentParser
 from core.sql.database import DatabaseAccessor
 
