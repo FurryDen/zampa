@@ -6,16 +6,29 @@
 
 ## How to start
 
-<b>Clone this repo:</b> ```git clone https://github.com/FurryDen/zampa.git```
+<b>Clone this repo:</b> ```git clone https://github.com/Squirrel-Network/nebula.git```
+<br>
+<b>Import the database from the /SQL folder in your database(MariaDB)</b>
+<br>
+<b>In your shell start this bot use this command=></b> ```python3 bot.py```
+<br>
 <br>
 
 ## Requirements ⚙️
 
 Besides [Python 3.7+](https://www.python.org/downloads/) we will be using the following packages:
 
-<b>Install requirements</b> (https://github.com/FurryDen/zampa/blob/master/requirements.txt)
+<b>Install requirements</b> (https://github.com/Squirrel-Network/nebula/blob/master/requirements.txt)
 <br>
 <b>Command:</b> ```pip install -r requirements.txt``` <b>Or</b> ```pip3 install -r requirements.txt```
+
+### Do you have problems installing mysqlclient requirements?
+Use this command:
+<ul>
+<li><b>Centos:</b> sudo yum install mysql-devel</li>
+<li><b>Ubuntu/Debian:</b> sudo apt-get install python-dev default-libmysqlclient-dev</li>
+<li><b>Fedora:</b> sudo dnf install python python-devel mysql-devel redhat-rpm-config gcc</li>
+</ul>
 
 <br>
 
@@ -27,9 +40,10 @@ Besides [Python 3.7+](https://www.python.org/downloads/) we will be using the fo
 
 | Command | Description |
 | --- | --- |
-| /ban | ban user |
-| /muta | mute user |
-| /smuta | unmute user |
+| /ban -m {text} or /ban @username -m {text} | Ban the user |
+| /unban | Unban the user |
+| /mute | mute user |
+| /unmute | unmute user |
 | /info | user information and chat id |
 | /delete | delete message |
 | /kick | kick user |
@@ -40,12 +54,19 @@ Besides [Python 3.7+](https://www.python.org/downloads/) we will be using the fo
 | Command | Description |
 | --- | --- |
 | /a {text}| announcement |
-| /setfissa {text} | set pin message by bot |
-| /fissa | pin message by bot |
+| /setpin {text} | set pin message by bot |
+| /pin | pin message by bot |
 | /info | user information and chat id |
 | /delete | delete message |
 | /kick | kick user |
-| /meteo yourcityname | weather |
+| /warn | warn user(experimental function) |
+| /unwarn | unwarn user(experimental function) |
+| /weather yourcityname | weather |
+| /staff | List group staff |
+| /silence | Mute the whole group |
+| /say {text}  | Get the bot talking |
+| /badword {text} | Add badword in your group |
+| /badlist  | Badword List |
 <br>
 <h3>Welcome Settings</h3>
 
@@ -57,24 +78,26 @@ Besides [Python 3.7+](https://www.python.org/downloads/) we will be using the fo
 | /add BUTTON,example.com | add button into welcome |
 | /listbutton | remove and see the welcome buttons |
 
-
-<b>Import the database from the /SQL folder</b>
 <br>
-<b>In your shell start this bot use this command=></b> ```python3 bot.py```
+<h3>Voting System Settings</h3>
 
-### Do you have problems installing mysqlclient requirements?
-Use this command:
-<ul>
-<li><b>Centos:</b> sudo yum install mysql-devel</li>
-<li><b>Ubuntu/Debian:</b> sudo apt-get install python-dev default-libmysqlclient-dev</li>
-<li><b>Fedora:</b> sudo dnf install python python-devel mysql-devel redhat-rpm-config gcc</li>
-</ul>
+| Command | Description |
+| --- | --- |
+| /enable | enables voting for a user in the group |
+| /vote or /downvote | Vote for a user or Remove a user's vote |
+| /score | View your score in the group |
+
+
+<br>
+
+### Do you want to use Docker? 🐳
+Go to: https://github.com/Squirrel-Network/nebula/tree/master/docker
 
 <b>Important Note: This bot only works with python telegram bot 12.1.1+</b>
 <br>
 
 ## How can I create a plugin?
-🔷 Go to the /plugins folder (https://github.com/FurryDen/zampa/tree/master/plugins)
+🔷 Go to the /plugins folder (https://github.com/Squirrel-Network/nebula/tree/master/plugins)
 <br>
 🔷 inside the plugins folder you will find the ```__init__.py``` file
     Every time you add a plugin inside the folder you have to add the name of the file in the ```__all__``` array
@@ -85,9 +108,11 @@ Use this command:
     <a href="https://imgur.com/dR0nN1P"><img src="https://i.imgur.com/dR0nN1P.png" title="source: imgur.com" /></a>
     <br>
 🔷Now let's go to bot.py and enter our plugin command with the following command line:
-    ```dispatcher.add_handler (CommandHandler ("banana", plugins.banana.init))```
+<br>
+    ```FUNCTION(CMH("banana", plugins.banana.init))```
     where we will insert plugins.filename.functionname
     and in "banana" enter the command that will work on telegram (/banana)
+    <br>
     <a href="https://imgur.com/sOoPruP"><img src="https://i.imgur.com/sOoPruP.png" title="source: imgur.com" /></a>
     <br>
 🔷 Video Tutorial: https://youtu.be/Bmm37wG1EZQ
@@ -100,7 +125,7 @@ Thanks to https://github.com/stefano-mecocci
 <br>
 Thanks to https://github.com/JervNorsk
 <br>
-Thanks to https://github.com/Kavuti/python-italy-telegram-bot
+Thanks to https://github.com/PaulSonOfLars/tgbot
 
 ## License 📄
 
