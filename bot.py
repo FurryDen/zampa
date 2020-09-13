@@ -68,6 +68,10 @@ def commandHandler(dsp):
     FUNCTION(CMH("wikipedia", usr.define.init))
     FUNCTION(CMH("joke", usr.joke.init))
     FUNCTION(CMH("staff", usr.get_staff.init))
+    FUNCTION(CMH("gdpr", usr.gdpr.init))
+    FUNCTION(CMH("vote", usr.vote.init))
+    FUNCTION(CMH("downvote", usr.downvote.init))
+    FUNCTION(CMH("score", usr.score.init))
 
 #########################################################################
 #                           ADMIN COMMAND                               #
@@ -97,6 +101,7 @@ def commandHandler(dsp):
     FUNCTION(CMH("badlist", adm.list_badwords.init))
     FUNCTION(CMH("warn", adm.warn.init))
     FUNCTION(CMH("unwarn", adm.unwarn.init))
+    FUNCTION(CMH("enable", adm.register_rep.init))
 
 #########################################################################
 #                           OWNER COMMAND                               #

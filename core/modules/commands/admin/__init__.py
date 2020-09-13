@@ -1,6 +1,7 @@
 __all__ = ["mute",
            "unmute",
            "ban",
+           "unban",
            "pin",
            "say",
            "announcement",
@@ -19,6 +20,7 @@ __all__ = ["mute",
            "set_rules",
            "list_badwords",
            "warn",
-           "unwarn"]
+           "unwarn",
+           "register_rep"]
 
 from core.modules.commands.admin import *

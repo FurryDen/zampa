@@ -14,7 +14,10 @@ __all__ = [
            "define",
            "joke",
            "get_staff",
-           "gdpr"
+           "gdpr",
+           "vote",
+           "downvote",
+           "score"
            ]
 
 from core.modules.commands.user import *

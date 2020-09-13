@@ -93,10 +93,11 @@ def ban(bot, chat, admin, user, options):
 
     chat.kick_member(user.id)
     chat.send_message(
-        text="{user} è stato <b>bannato</b> da {chat}\n" \
+     text='<a href="tg://user?id={userid}">{user}</a> è stato <b>bannato</b> da {chat}\n'\
             "per il seguente motivo: {motivation}"
             .format(
-                user=user.username,
+                user=user.username or user.first_name,
+                userid= user.id,
                 chat=chat.title,
                 motivation=motivation
             ),
@@ -108,7 +109,7 @@ def ban(bot, chat, admin, user, options):
             "GRUPPO: {chat}\n"\
             "MOTIVO: {motivation}"
             .format(
-                username=user.first_name,
+                username=user.username or user.first_name,
                 id=user.id,
                 chat=chat.title,
                 motivation=motivation
